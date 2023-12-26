@@ -8,7 +8,7 @@ const ListOfContacts = () => {
   const { data, isSuccess} = useGetContactsQuery();
   const filter = useSelector(selectQuery);
 
-  const filteredContacts = data.filter(item => item.name.toLowerCase().includes(filter));
+  const filteredContacts = data?.filter(item => item.name.toLowerCase().includes(filter));
 
   return (
     <div className={css.tableContainer}>
