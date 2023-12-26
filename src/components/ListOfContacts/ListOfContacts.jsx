@@ -1,11 +1,9 @@
 import css from './ListOfContacts.module.css';
-import { useGetContactsQuery } from '../../redux/contactsAPI';
 import Contact from '../Contact/Contact';
 import { selectQuery } from '../../redux/selectors';
 import { useSelector } from 'react-redux';
 
-const ListOfContacts = () => {
-  const { data, isSuccess} = useGetContactsQuery();
+const ListOfContacts = ({data, isSuccess}) => {
   const filter = useSelector(selectQuery);
 
   const filteredContacts = data?.filter(item => item.name.toLowerCase().includes(filter));
