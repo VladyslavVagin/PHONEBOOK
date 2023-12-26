@@ -1,15 +1,14 @@
 import css from './ListOfContacts.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectContacts, selectQuery } from '../../redux/selectors';
-import trashIcon from '../../icons/trash.png';
-import { deleteContact } from '../../redux/operations';
+import { useGetContactsQuery } from '../../redux/contactsAPI';
+import Contact from '../Contact/Contact';
+import { selectQuery } from '../../redux/selectors';
+import { useSelector } from 'react-redux';
 
 const ListOfContacts = () => {
-  const dispatch = useDispatch();
-  const items = useSelector(selectContacts);
+  const { data, isSuccess} = useGetContactsQuery();
   const filter = useSelector(selectQuery);
 
-  const filteredContacts = items.filter(item => item.name.toLowerCase().includes(filter));
+  const filteredContacts = data.filter(item => item.name.toLowerCase().includes(filter));
 
   return (
     <div className={css.tableContainer}>
@@ -22,24 +21,8 @@ const ListOfContacts = () => {
           </tr>
         </thead>
         <tbody className={css.tbody}>
-          {filteredContacts.map(({ id, name, phone }) => {
-            return (
-              <tr key={id} className={css.tr}>
-                <td className={css.td}>{name}</td>
-                <td className={css.td}>{phone}</td>
-                <td className={css.td}>
-                  {' '}
-                  <button
-                    type="button"
-                    className={css.deleteBtn}
-                    id={id}
-                    onClick={() => dispatch(deleteContact(id))}
-                  >
-                    <img src={trashIcon} alt="trash icon" width={16} />
-                  </button>
-                </td>
-              </tr>
-            );
+          {isSuccess && filteredContacts?.map((contact) => {
+            return <Contact key={contact.id} contact={contact}/>;
           })}
         </tbody>
       </table>
