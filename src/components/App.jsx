@@ -6,16 +6,18 @@ import { useGetContactsQuery } from '../redux/contactsAPI';
 import Loader from './Loader/Loader';
 
 export const App = () => {
-  const { data, isSuccess, isLoading, isError} = useGetContactsQuery();
+  const { data, isSuccess, isLoading, isError } = useGetContactsQuery();
 
   return (
     <div className="container">
       <h1>Phonebook</h1>
-      <AddContactForm data={data}/>
-      {isLoading && <Loader/> }
-      {!isLoading && !isError && <h2>Contacts</h2>}
-      {!isLoading && !isError &&  <Filter />}
-      {!isLoading && !isError &&   <ListOfContacts data={data} isSuccess={isSuccess}/>}
+      <AddContactForm data={data} />
+      {isLoading && <Loader />}
+      {!isLoading && !isError && data.length !== 0 && <h2>Contacts</h2>}
+      {!isLoading && !isError && data.length !== 0 && <Filter />}
+      {!isLoading && !isError && data.length !== 0 && (
+        <ListOfContacts data={data} isSuccess={isSuccess} />
+      )}
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -27,6 +29,7 @@ export const App = () => {
         draggable
         pauseOnHover={false}
         theme="dark"
+        style={{width: 200, marginLeft: 'auto'}}
       />
     </div>
   );

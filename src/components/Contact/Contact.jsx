@@ -9,9 +9,9 @@ const Contact = ({ contact }) => {
 
   return (
     <tr className={css.tr}>
-      <td className={css.td}>{name}</td>
-      <td className={css.td}>{phone}</td>
-      <td className={css.td}>
+      <td className={css.name}>{name}</td>
+      <td className={css.phone}>{phone}</td>
+      <td className={css.delete}>
         {' '}
         <button
           type="button"

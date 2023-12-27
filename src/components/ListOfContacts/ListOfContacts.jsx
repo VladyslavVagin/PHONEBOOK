@@ -15,7 +15,7 @@ const ListOfContacts = ({data, isSuccess}) => {
           <tr>
             <th className={css.th}>Name</th>
             <th className={css.th}>Phone</th>
-            <th className={css.th}>Remove</th>
+            <th className={css.th}>DLT</th>
           </tr>
         </thead>
         <tbody className={css.tbody}>

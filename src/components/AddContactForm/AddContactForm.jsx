@@ -53,9 +53,9 @@ const AddContactForm = ({ data }) => {
             name="number"
             className={css.input}
             required
-            pattern="[0-9]{9,16}"
+            pattern="[0-9]{9,12}"
           />
-          <span className={css.additional}>(9 - 14) numbers</span>{' '}
+          <span className={css.additional}>(9 - 12) numbers</span>{' '}
           <ErrorMessage name="number" component="span" />{' '}
         </label>
         <button className={css.addContactBtn} type="submit">
